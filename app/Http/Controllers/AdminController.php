@@ -95,7 +95,13 @@ class AdminController extends Controller
 
     public function profile(){
         // dd(Auth::user()); die();
-        $data = session()->get('data')[0];
+        $data = DB::table('users')
+        ->join('admin_accounts', 'users.user_id', 'admin_accounts.id')
+        ->select('admin_accounts.*','admin_accounts.id as user_id', 'users.*')
+        ->where('users.id','=',Auth::user()->id)
+        ->first();
+
+        dd($data);
         return view('pages.profile', compact(
             'data'
         ));

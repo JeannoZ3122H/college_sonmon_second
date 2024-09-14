@@ -23,7 +23,7 @@
                                 {{ strftime("%d", strtotime(\Carbon\Carbon::now())) }}
                             </span>
                             <span class="fs-7 mt-auto ms-auto">
-                                {{ \Carbon\Carbon::now()->format('m/Y') }}
+                                {{ \Carbon\Carbon::now()->format('/m/Y') }}
                             </span>
                         </p>
                         {{-- <p class="pb-0">Best seller of the month</p>

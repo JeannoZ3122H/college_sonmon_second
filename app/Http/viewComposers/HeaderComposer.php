@@ -18,15 +18,15 @@ class HeaderComposer {
             ->select('roles.role', 'admin_accounts.*')
             ->where('admin_accounts.id', $id)
             ->first());
+
+            $view->with("user", DB::table('users')
+            ->join('admin_accounts', 'users.user_id', 'admin_accounts.id')
+            ->select('admin_accounts.*','admin_accounts.id as user_id', 'users.*')
+            ->where('users.id', $id)
+            ->first());
+
+            $view->with('user_data', Auth::user());
+            $view->with('data', User::find(Auth::user()->id));
         }
-
-        $view->with("user", DB::table('users')
-        ->join('admin_accounts', 'users.user_id', 'admin_accounts.id')
-        ->select('admin_accounts.*','admin_accounts.id as user_id', 'users.*')
-        ->where('users.id', $id)
-        ->first());
-
-        $view->with('user_data', Auth::user());
-        $view->with('data', User::find(Auth::user()->id));
     }
 }
