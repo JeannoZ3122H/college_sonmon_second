@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['authentification']]);
+        $this->middleware('auth:web', ['except' => ['authentification']]);
     }
 
     public function forget_password_email_verify(Request $request)
@@ -73,7 +73,7 @@ class AuthController extends Controller
                 if ($u_resp):
                     session()->flush();
                     MessageService::isSuccess('Modification effectuée vous pouvez continuer. Merci !');
-                    return redirect()->route('auth');
+                    return redirect()->route('login');
                 else:
                     MessageService::isError('Échec de modification de mot de passe. Réessayer s\'il vous plaît !');
                     return redirect()->route('new_password');
@@ -87,30 +87,29 @@ class AuthController extends Controller
 
     public function logOut($id)
     {
-
-        if ($id) {
+        if (isset($id)) {
 
             $get_user_status = DB::table('users')
-                ->where('id', $id)
-                ->value('connected');
+            ->where('id', $id)
+            ->value('status_connection');
 
             if ($get_user_status == 1) {
                 $user_offline = DB::table('users')
                     ->where('id', $id)
-                    ->update(['connected' => 0]);
+                    ->update(['status_connection' => 0]);
 
                 if ($user_offline == true) {
                     Session::flush();
                     Auth::logout();
                     MessageService::logoutSuccess();
-                    return redirect()->route('auth');
+                    return redirect()->route('login');
                 } else {
                     MessageService::isErrorFailed();
                     return back();
                 }
             } else {
                 MessageService::isAlreadlyDisconnected();
-                return redirect()->route('auth');
+                return redirect()->route('login');
             }
         } else {
             MessageService::isErrorFailed();

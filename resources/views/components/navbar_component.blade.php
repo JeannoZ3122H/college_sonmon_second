@@ -22,7 +22,7 @@
                 <a style="text-transform: inherit" class="btn btn-sm bg-none" role="button">
                     <small>
                         <i class="menu-icon tf-icons mdi mdi-email-outline me-2 fa-2x"></i>
-                        {{ Auth::user()->email }}
+                        {{ $_user->email }}
                     </small>
                 </a>
             </li>
@@ -30,7 +30,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ Auth::user()->user_img }}" alt class="w-px-40 h-auto rounded-circle" />
+                        <img src="{{ $_user->admin_img }}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end mt-3 py-2">
@@ -39,13 +39,13 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 me-2 pe-1">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ Auth::user()->user_img }}" alt
+                                        <img src="{{ $_user->admin_img }}" alt
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h6 class="mb-0">{{ Auth::user()->full_name }}</h6>
-                                    <small class="text-muted">{{ Auth::user()->role }}</small>
+                                    <h6 class="mb-0">{{ $_user->fname.' '.$_user->lname }}</h6>
+                                    <small class="text-muted">{{ $_user->role }}</small>
                                 </div>
                             </div>
                         </a>
@@ -63,7 +63,7 @@
                         <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('logout', Auth::user()->id) }}">
+                        <a class="dropdown-item" href="{{ route('logOut', Auth::user()->id) }}">
                             <i class="mdi mdi-power me-1 mdi-20px"></i>
                             <span class="align-middle">Déconnexion</span>
                         </a>

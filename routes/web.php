@@ -28,7 +28,7 @@ Route::controller(AuthController::class)
 // START \\
 ->group(function () {
     Route::post('/authentification', 'authentification')->name('authentification');
-    Route::get('/logout/{id}', 'logout')->name('logout');
+    Route::get('/logout/{id}', 'logOut')->name('logOut');
     Route::post('/forget_password_email_verify', 'forget_password_email_verify')->name('forget_password_email_verify');
     Route::post('/forget_password_reset', 'forget_password_reset')->name('forget_password_reset');
 });
@@ -39,7 +39,7 @@ Route::controller(AuthController::class)
 Route::controller(AdminController::class)
 // START \\
 ->group(function () {
-    Route::get('/auth', 'auth')->name('auth');
+    Route::get('/auth', 'auth')->name('login');
     Route::get('/forget_password', 'forget_password')->name('forget_password');
     Route::get('/new_password', 'forget_password')->name('new_password');
 });

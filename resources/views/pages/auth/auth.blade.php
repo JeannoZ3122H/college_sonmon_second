@@ -288,7 +288,7 @@
 
     <!-- / Content -->
     <div class="buy-now">
-        <a href="{{ route('auth') }}" class="btn btn-danger btn-buy-now">
+        <a href="{{ route('login') }}" class="btn btn-danger btn-buy-now">
             Retour
         </a>
     </div>

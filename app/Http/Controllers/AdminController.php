@@ -90,6 +90,12 @@ class AdminController extends Controller
         ->join('roles', 'admin_accounts.role_id', '=', 'roles.id')
         ->select('roles.role', 'admin_accounts.*')
         ->get();
+
+        // dd(DB::table('admin_accounts')
+        //     ->join('roles', 'admin_accounts.role_id', '=', 'roles.id')
+        //     ->select('roles.role', 'admin_accounts.*')
+        //     ->where('admin_accounts.id', Auth::user()->id)
+        //     ->first());
         return view('pages.dashboard', compact('list_admin'));
     }
 
@@ -101,7 +107,7 @@ class AdminController extends Controller
         ->where('users.id','=',Auth::user()->id)
         ->first();
 
-        dd($data);
+        // dd($data);
         return view('pages.profile', compact(
             'data'
         ));
